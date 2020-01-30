@@ -1,5 +1,5 @@
 {
-  "name": "ra-jsonapi-client",
+  "name": "ra-jsonapi-client-jfedick",
   "version": "0.6.1",
   "description": "JSON API data provider for react-admin.",
   "main": "build/index.js",
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/jfedick/ra-jsonapi-client/issues"
   },
-  "homepage": "https://github.com/jfedick/ra-jsonapi-client#readme",
+  "homepage": "https://github.com/jfedicky/ra-jsonapi-client#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
