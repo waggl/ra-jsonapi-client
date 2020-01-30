@@ -149,9 +149,14 @@ exports.default = function (apiUrl) {
           // Add the reference id to the filter params.
           _query2['filter[' + params.target + ']'] = params.id;
 
-          // Support sparse fieldset
+          // Support sparse fieldset fields key
           Object.keys(params.fields || {}).forEach(function (key) {
             _query2['fields[' + key + ']'] = params.fields[key];
+          });
+
+          // Support sparse fieldset include key
+          Object.keys(params.include || {}).forEach(function (key) {
+            _query2['include[' + key + ']'] = params.include[key];
           });
 
           url = apiUrl + '/' + resource + '?' + (0, _qs.stringify)(_query2);

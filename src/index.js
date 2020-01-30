@@ -121,9 +121,14 @@ export default (apiUrl, userSettings = {}) => (type, resource, params) => {
       // Add the reference id to the filter params.
       query[`filter[${params.target}]`] = params.id;
 
-      // Support sparse fieldset
+      // Support sparse fieldset fields key
       Object.keys(params.fields || {}).forEach((key) => {
         query[`fields[${key}]`] = params.fields[key];
+      });
+
+      // Support sparse fieldset include key
+      Object.keys(params.include || {}).forEach((key) => {
+        query[`include[${key}]`] = params.include[key];
       });
 
       url = `${apiUrl}/${resource}?${stringify(query)}`;
