@@ -131,10 +131,11 @@ export default (apiUrl, userSettings = {}) => (type, resource, params) => {
         query[`include[${key}]`] = params.include[key];
       });
 
-      // Support sort params 
-      Object.keys(params.include || {}).forEach((key) => {
-        query[`sort[${key}]`] = params.include[key];
-      });            
+      // Add sort parameter
+      if (params.sort && params.sort.field) {
+        const prefix = params.sort.order === 'ASC' ? '' : '-';
+        query.sort = `${prefix}${params.sort.field}`;
+      }
 
       url = `${apiUrl}/${resource}?${stringify(query)}`;
       break;
