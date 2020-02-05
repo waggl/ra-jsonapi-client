@@ -131,6 +131,11 @@ export default (apiUrl, userSettings = {}) => (type, resource, params) => {
         query[`include[${key}]`] = params.include[key];
       });
 
+      // Support sort params 
+      Object.keys(params.include || {}).forEach((key) => {
+        query[`sort[${key}]`] = params.include[key];
+      });            
+
       url = `${apiUrl}/${resource}?${stringify(query)}`;
       break;
     }
