@@ -160,10 +160,10 @@ exports.default = function (apiUrl) {
             _query2['fields[' + key + ']'] = params.fields[key];
           });
 
-          // Support sparse fieldset include key
-          Object.keys(params.include || {}).forEach(function (key) {
-            _query2['include[' + key + ']'] = params.include[key];
-          });
+          // Support include key
+          if (params.include) {
+            _query2.include = params.include;
+          }
 
           // Add sort parameter
           if (params.sort && params.sort.field) {
