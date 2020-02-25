@@ -124,12 +124,6 @@ exports.default = function (apiUrl) {
             'filter[id]': params.ids
           }, { arrayFormat: settings.arrayFormat });
 
-          // Add sort parameter
-          if (params.sort && params.sort.field) {
-            var _prefix = params.sort.order === 'ASC' ? '' : '-';
-            _query2.sort = '' + _prefix + params.sort.field;
-          }
-
           url = apiUrl + '/' + resource + '?' + _query;
           break;
         }
@@ -160,10 +154,10 @@ exports.default = function (apiUrl) {
             _query2['fields[' + key + ']'] = params.fields[key];
           });
 
-          // Support include key
-          if (params.include) {
-            _query2.include = params.include;
-          }
+          // Support sparse fieldset include key
+          Object.keys(params.include || {}).forEach(function (key) {
+            _query2['include[' + key + ']'] = params.include[key];
+          });
 
           // Add sort parameter
           if (params.sort && params.sort.field) {

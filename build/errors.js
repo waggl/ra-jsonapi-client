@@ -29,14 +29,17 @@ var NotImplementedError = exports.NotImplementedError = function (_Error) {
 var HttpError = exports.HttpError = function (_Error2) {
   _inherits(HttpError, _Error2);
 
-  function HttpError(message, status) {
+  function HttpError(response, status) {
     _classCallCheck(this, HttpError);
 
-    var _this2 = _possibleConstructorReturn(this, (HttpError.__proto__ || Object.getPrototypeOf(HttpError)).call(this, message));
+    var _this2 = _possibleConstructorReturn(this, (HttpError.__proto__ || Object.getPrototypeOf(HttpError)).call(this, response.message));
 
-    _this2.message = message;
-    _this2.status = status;
-    _this2.name = 'HttpError';
+    _this2.name = _this2.constructor.name;
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(_this2, _this2.constructor);
+    } else {
+      _this2.stack = new Error(response).stack;
+    }
     return _this2;
   }
 
